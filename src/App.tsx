@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import './App.css';
 import MachineRoom from './component/MachineRoom';
+import { getCabinetByName} from './server/cabinet'
 
 // 创建机房对象
 let room : MachineRoom;
@@ -50,8 +51,16 @@ function App() {
     
 
     // 当鼠标移入机会，显示信息面板
-    room.onMouseOverCabinet  = ()=>{
+    room.onMouseOverCabinet  = ({name})=>{
       setPlaneDisplay('block')
+
+      // 基于cabinet.name获取机柜数据
+      getCabinetByName(name).then(res=>{
+        const { temperature,capacity, count } = res;
+        setCurCabinet({
+          name,temperature,capacity,count
+        })
+      })
     }
 
     // 当鼠标在机柜上移动，就让信息面板跟随移动
