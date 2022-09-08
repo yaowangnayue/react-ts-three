@@ -56,7 +56,6 @@ export default class MachineRoom {
 
   // 加载GLTF模型
   loadGLTF(modelName:string = '') {
-    console.log('this.modelPath + modelName::',this.modelPath + modelName);
     
     gltfLoader.load(this.modelPath + modelName, ({ scene: { children } }) => {
       children.forEach((obj: Mesh)=>{
