@@ -23,8 +23,19 @@ renderer.setSize(innerWidth, innerHeight);
 const geometry = new BoxGeometry();
 // const material = new MeshNormalMaterial(); // 这个材质不支持光源
 const material = new MeshPhongMaterial({ color: 0x44aa88 }); // 这个材质是支持光源的
-const cube = new Mesh(geometry, material);
-scene.add(cube);
+// const cube = new Mesh(geometry, material);
+// scene.add(cube);
+
+// 添加多个立方体
+const cubes = [-2,0, 2].map(num=> makeInstance(num));
+function makeInstance (x: number){
+  const cube = new Mesh(geometry, material);
+  cube.position.x = x;
+  return cube;
+}
+// 添加到场景里
+scene.add(...cubes)
+
 
 // 先定义平行光的颜色
 const color = 0xffffff; 
@@ -35,12 +46,14 @@ const light = new DirectionalLight(color, intensity);
 // 设置下光源的位置
 light.position.set(-1,2,4);
 // 添加平行光源
-scene.add(light);
+scene.add(light); 
 
 function animate() {
   requestAnimationFrame(animate);
-  cube.rotation.x += 0.01;
-  cube.rotation.y += 0.01;
+  cubes.forEach(cube => {
+    cube.rotation.x += 0.01;
+    cube.rotation.y += 0.01;
+  })
   renderer.render(scene, camera);
 }
 
