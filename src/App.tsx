@@ -3,7 +3,9 @@ import { useRoutes} from 'react-router-dom'
 import './App.css';
 import Machine from './views/MachineRoom';
 import Basics from './views/Basics';
-import RenderStructure from './views/RenderStructure.tsx';
+import RenderStructure from './views/RenderStructure';
+import ResponsiveDesign from './views/ResponsiveDesign';
+import Illustration from './views/Illustration';
 
 const App:React.FC = ():JSX.Element=> {
 
@@ -20,11 +22,15 @@ const App:React.FC = ():JSX.Element=> {
       path:'/machine',
       element: <Machine/>
      },
+     {
+      path:'/responsiveDesign',
+      element: <ResponsiveDesign/>
+     },
+     {
+      path:'/illustration',
+      element: <Illustration/>
+     },
   ])
-
-  // return (
-  //   <Machine/>
-  // )
 
   return <>{routing} </>
 }

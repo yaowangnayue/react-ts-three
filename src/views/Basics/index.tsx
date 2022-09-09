@@ -11,6 +11,13 @@ const Basics: React.FC = ():JSX.Element =>{
         <li>
           <Link to='/machine'>machine</Link>
         </li>
+        <li>
+          <Link to='/responsiveDesign'>responsiveDesign</Link>
+        </li>
+        <li>
+          <Link to='/illustration'>illustration三维插图</Link>
+        </li>
+        
       </ul>
     </nav>
   )

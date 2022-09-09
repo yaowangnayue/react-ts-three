@@ -1,14 +1,22 @@
-import React,{ useState, useEffect, useRef}  from 'react'; 
+/**
+ * 设置自适应画布
+ */
+import React,{ 
+  // useState, 
+  useEffect, 
+  useRef
+}  from 'react'; 
 import { 
   BoxGeometry, 
   DirectionalLight, 
   Mesh, 
-  MeshNormalMaterial, 
+  // MeshNormalMaterial, 
   MeshPhongMaterial, 
   PerspectiveCamera, 
   Scene, 
   WebGLRenderer } 
 from "three";
+import './index.css'
 
 
 const { innerWidth, innerHeight } = window;
@@ -18,7 +26,7 @@ const camera = new PerspectiveCamera(75, innerWidth / innerHeight, 0.1, 1000);
 camera.position.z = 5;
 
 const renderer = new WebGLRenderer();
-renderer.setSize(innerWidth, innerHeight);
+// renderer.setSize(innerWidth, innerHeight);
 
 const geometry = new BoxGeometry();
 // const material = new MeshNormalMaterial(); // 这个材质不支持光源
@@ -34,7 +42,7 @@ function makeInstance (x: number){
   return cube;
 }
 // 添加到场景里
-scene.add(...cubes)
+scene.add(...cubes )
 
 
 // 先定义平行光的颜色
@@ -50,6 +58,14 @@ scene.add(light);
 
 function animate() {
   requestAnimationFrame(animate);
+
+
+  if (resizeRendererToDisplaySize(renderer)) {
+    const { clientWidth, clientHeight } = renderer.domElement;
+    camera.aspect = clientWidth / clientHeight;
+    camera.updateProjectionMatrix();
+  }
+   
   cubes.forEach(cube => {
     cube.rotation.x += 0.01;
     cube.rotation.y += 0.01;
@@ -58,8 +74,21 @@ function animate() {
 }
 
 
+// 建立一个让canvas 像素尺寸随css 尺寸同步更新的方法
 
-const RenderStructure: React.FC = ():JSX.Element =>{
+// 将渲染尺寸设置为其显示的尺寸，返回画布像素尺寸是否等于其显示(css)尺寸的布尔值
+function resizeRendererToDisplaySize(renderer: WebGLRenderer): Boolean {
+  const { width, height, clientWidth, clientHeight } = renderer.domElement;
+  const needResize = width !== clientWidth || height !== clientHeight;
+
+  if (needResize) {
+    renderer.setSize(clientWidth, clientHeight, false);
+  }
+  return needResize;
+} 
+
+
+const ResponsiveDesign: React.FC = ():JSX.Element =>{
 
   const divRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
@@ -71,8 +100,8 @@ const RenderStructure: React.FC = ():JSX.Element =>{
     }
     
   }, []);
-  return <div ref={divRef}></div>; 
+  return <div ref={divRef} className="canvasWrapper"></div>; 
 
 }
 
-export default RenderStructure;
+export default ResponsiveDesign;
