@@ -17,6 +17,9 @@ const Basics: React.FC = ():JSX.Element =>{
         <li>
           <Link to='/illustration'>illustration三维插图</Link>
         </li>
+        <li>
+          <Link to='/Dpr'>Dpr自适应设备分辨率</Link>
+        </li>
         
       </ul>
     </nav>

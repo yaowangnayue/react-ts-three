@@ -5,7 +5,8 @@ import Machine from './views/MachineRoom';
 import Basics from './views/Basics';
 import RenderStructure from './views/RenderStructure';
 import ResponsiveDesign from './views/ResponsiveDesign';
-import Illustration from './views/Illustration';
+import Illustration from './views/Illustration'
+import Dpr from './views/Dpr';
 
 const App:React.FC = ():JSX.Element=> {
 
@@ -29,6 +30,10 @@ const App:React.FC = ():JSX.Element=> {
      {
       path:'/illustration',
       element: <Illustration/>
+     },
+     {
+      path:'/Dpr',
+      element: <Dpr/>
      },
   ])
 
