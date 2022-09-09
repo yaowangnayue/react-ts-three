@@ -96,7 +96,7 @@ function resizeRendererToDisplaySize(renderer: WebGLRenderer): Boolean {
 } 
 
 
-const Dpr: React.FC = ():JSX.Element =>{
+const LineGeo: React.FC = ():JSX.Element =>{
 
   const divRef = useRef<HTMLDivElement>(null);
   useEffect(() => { 
@@ -112,4 +112,4 @@ const Dpr: React.FC = ():JSX.Element =>{
 
 }
 
-export default Dpr;
+export default LineGeo;
